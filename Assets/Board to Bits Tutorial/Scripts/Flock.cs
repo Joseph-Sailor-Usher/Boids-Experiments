@@ -59,7 +59,7 @@ namespace BoardToBitsTutorial
                     transform
                 );
                 newAgent.name = "Agent " + i;
-                //newAgent.Initialize(this);
+                newAgent.Initialize(this);
                 agents.Add(newAgent);
             }
         }
@@ -70,14 +70,14 @@ namespace BoardToBitsTutorial
             {
                 List<Transform> context = GetNearbyObjects(agent);
                 //For debug only
-                agent.GetComponentInChildren<Image>().color = Color.Lerp(Color.white, Color.red, context.Count / 6f);
-                //Vector2 move = behavior.CalculateMove(agent, context, this);
-                //move *= driveFactor;
-                //if(move.sqrMagnitude > squareMaxSpeed)
-                //{
-                //    move = move.normalized * maxSpeed;
-                //}
-                //agent.Move(move);
+                //agent.GetComponentInChildren<Image>().color = Color.Lerp(Color.white, Color.red, context.Count / 6f);
+                Vector2 move = behavior.CalculateMove(agent, context, this);
+                move *= driveFactor;
+                if(move.sqrMagnitude > squareMaxSpeed)
+                {
+                    move = move.normalized * maxSpeed;
+                }
+                agent.Move(move);
             }
         }
 
